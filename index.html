@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FinTrack Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="light">
+
+  
+  <div id="loginPage" class="auth-wrap">
+    <div class="auth-box">
+      <div class="auth-brand">
+        <div class="brand-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div>
+          <div class="brand-name">FinTrack Pro</div>
+          <div class="brand-tagline">Enterprise Finance</div>
+        </div>
+      </div>
+      <h2>Welcome back</h2>
+      <p class="auth-sub">Sign in to your account</p>
+      <div class="field">
+        <label>Username</label>
+        <input type="text" id="loginUser" placeholder="Enter username" autocomplete="username" />
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" id="loginPass" placeholder="Enter password" autocomplete="current-password" />
+      </div>
+      <p id="loginErr" class="err-text"></p>
+      <button class="btn-submit" onclick="login()">Sign in</button>
+      <p class="auth-footer">No account? <a href="#" onclick="switchPage('register')">Register here</a></p>
+    </div>
+  </div>
+
+
+  <div id="registerPage" class="auth-wrap" style="display:none">
+    <div class="auth-box">
+      <div class="auth-brand">
+        <div class="brand-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div>
+          <div class="brand-name">FinTrack Pro</div>
+          <div class="brand-tagline">Enterprise Finance</div>
+        </div>
+      </div>
+      <h2>Create account</h2>
+      <p class="auth-sub">Start tracking your finances</p>
+      <div class="field">
+        <label>Full Name</label>
+        <input type="text" id="regName" placeholder="Your full name" />
+      </div>
+      <div class="field">
+        <label>Username</label>
+        <input type="text" id="regUser" placeholder="Choose a username" />
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" id="regPass" placeholder="Min 4 characters" />
+      </div>
+      <p id="registerErr" class="err-text"></p>
+      <button class="btn-submit" onclick="register()">Create account</button>
+      <p class="auth-footer">Have an account? <a href="#" onclick="switchPage('login')">Sign in</a></p>
+    </div>
+  </div>
+
+ 
+  <div id="app" style="display:none">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div>
+          <div class="brand-name">FinTrack Pro</div>
+          <div class="brand-tagline">Enterprise Finance</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item active" id="nav-dashboard" onclick="showPage('dashboard')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          Dashboard
+        </a>
+        <a href="#" class="nav-item" id="nav-settings" onclick="showPage('settings')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          Settings
+        </a>
+      </nav>
+    </aside>
+
+    
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+  
+    <div class="main-wrap">
+
+     
+      <header class="topbar">
+        <button class="hamburger" onclick="toggleSidebar()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div class="topbar-right">
+          <span class="topbar-user" id="topbarUser">Sachin Dahiya</span>
+          <button class="btn-logout" onclick="logout()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            Logout
+          </button>
+        </div>
+      </header>
+
+   
+      <div id="dashPage" class="page">
+        <div class="page-inner">
+
+          
+          <div class="dash-layout">
+            <div class="dash-main">
+
+              <div class="page-heading">
+                <h1>Financial Overview</h1>
+                <p>Real-time tracking application</p>
+              </div>
+
+              
+              <div class="stat-row">
+                <div class="stat-card">
+                  <div class="stat-icon blue">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                  </div>
+                  <div class="stat-label">Current Balance</div>
+                  <div class="stat-value" id="statBalance">₹0.00</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-icon green">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                  </div>
+                  <div class="stat-label">Total Income</div>
+                  <div class="stat-value green-val" id="statIncome">₹0.00</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-icon red">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
+                  </div>
+                  <div class="stat-label">Total Expense</div>
+                  <div class="stat-value red-val" id="statExpense">₹0.00</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-icon purple">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                  </div>
+                  <div class="stat-label">Total Transactions</div>
+                  <div class="stat-value" id="statCount">0</div>
+                </div>
+              </div>
+
+             
+              <div class="chart-section">
+                <div class="chart-head">
+                  <h3>Cash Flow Analysis</h3>
+                  <div class="chart-legend">
+                    <span class="legend-dot" style="background:#22c55e"></span> Income
+                    <span class="legend-dot" style="background:#ef4444"></span> Expenses
+                  </div>
+                </div>
+                <canvas id="chart" height="90"></canvas>
+              </div>
+
+             
+              <div class="table-section">
+                <div class="table-head">
+                  <h3>All Transactions</h3>
+                  <div class="table-controls">
+                    <div class="search-wrap">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                      <input type="text" id="searchInput" placeholder="Search transactions..." oninput="renderTable()" />
+                    </div>
+                    <select id="filterSelect" onchange="renderTable()">
+                      <option value="all">All Types</option>
+                      <option value="income">Income</option>
+                      <option value="expense">Expense</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="table-wrap">
+                <table id="txTable">
+                  <thead>
+                    <tr>
+                      <th>DATE</th>
+                      <th>DESCRIPTION</th>
+                      <th>CATEGORY</th>
+                      <th>AMOUNT</th>
+                      <th>ACTIONS</th>
+                    </tr>
+                  </thead>
+                  <tbody id="txBody"></tbody>
+                </table>
+                </div>
+                <div id="emptyMsg" class="empty-state">
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  <p>No transactions yet</p>
+                  <small>Use the button below to add your first one</small>
+                </div>
+              </div>
+
+            </div><!-- /.dash-main -->
+
+           
+            <aside class="right-panel">
+              <div class="panel-section">
+                <h4>Preferences</h4>
+                <div class="pref-row">
+                  <span>Dark Mode</span>
+                  <label class="toggle">
+                    <input type="checkbox" id="darkToggle" onchange="toggleDark()" />
+                    <span class="track"></span>
+                  </label>
+                </div>
+                <div class="pref-row">
+                  <span>Currency</span>
+                  <select id="currSel" onchange="saveCurrency()" class="mini-select">
+                    <option value="₹">INR ₹</option>
+                    <option value="$">USD $</option>
+                    <option value="€">EUR €</option>
+                    <option value="£">GBP £</option>
+                    <option value="¥">JPY ¥</option>
+                  </select>
+                </div>
+                <div class="pref-divider"></div>
+                <button class="btn-reset" onclick="resetAll()">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg>
+                  Reset All Data
+                </button>
+              </div>
+
+              <div class="panel-section">
+                <h4>Quick Summary</h4>
+                <div class="summary-item">
+                  <span class="s-label">Savings Rate</span>
+                  <span class="s-val green-val" id="savingsRate">0%</span>
+                </div>
+                <div class="summary-item">
+                  <span class="s-label">Avg. Transaction</span>
+                  <span class="s-val" id="avgTx">₹0.00</span>
+                </div>
+                <div class="summary-item">
+                  <span class="s-label">This month</span>
+                  <span class="s-val" id="thisMonth">0 txns</span>
+                </div>
+              </div>
+            </aside>
+
+          </div><!-- /.dash-layout -->
+        </div>
+      </div><!-- /#dashPage -->
+
+      <!-- SETTINGS PAGE -->
+      <div id="settingsPage" class="page" style="display:none">
+        <div class="page-inner">
+          <div class="page-heading">
+            <h1>Settings</h1>
+            <p>Manage your account and preferences</p>
+          </div>
+          <div class="settings-grid">
+            <div class="settings-card">
+              <h4>Profile</h4>
+              <div class="field">
+                <label>Display Name</label>
+                <input type="text" id="sName" placeholder="Your name" />
+              </div>
+              <button class="btn-save" onclick="saveProfile()">Save changes</button>
+            </div>
+            <div class="settings-card">
+              <h4>Currency</h4>
+              <div class="field">
+                <label>Preferred currency</label>
+                <select id="sCurr">
+                  <option value="₹">INR (₹)</option>
+                  <option value="$">USD ($)</option>
+                  <option value="€">EUR (€)</option>
+                  <option value="£">GBP (£)</option>
+                  <option value="¥">JPY (¥)</option>
+                </select>
+              </div>
+              <button class="btn-save" onclick="saveCurrencySettings()">Save currency</button>
+            </div>
+            <div class="settings-card">
+              <h4>Theme</h4>
+              <div class="pref-row" style="margin-top:8px">
+                <span>Dark mode</span>
+                <label class="toggle">
+                  <input type="checkbox" id="darkToggle2" onchange="toggleDark()" />
+                  <span class="track"></span>
+                </label>
+              </div>
+            </div>
+            <div class="settings-card danger">
+              <h4>Danger Zone</h4>
+              <p>Permanently deletes all transactions. Cannot be undone.</p>
+              <button class="btn-danger" onclick="resetAll()">Reset all data</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.main-wrap -->
+
+    <!-- ADD TRANSACTION BUTTON -->
+    <button class="fab" onclick="openModal()" title="Add Transaction">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    </button>
+
+    <!-- FAB LABEL -->
+    <div class="fab-label">Add Transaction</div>
+
+  </div><!-- /#app -->
+
+  <!-- ========== MODAL ========== -->
+  <div id="modalBg" class="modal-bg" onclick="closeModalOutside(event)" style="display:none">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>New Transaction</h3>
+        <button class="modal-x" onclick="closeModal()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="type-row">
+          <button class="type-btn active" id="typInc" onclick="setType('income')">Income</button>
+          <button class="type-btn" id="typExp" onclick="setType('expense')">Expense</button>
+        </div>
+        <div class="field">
+          <label>Description</label>
+          <input type="text" id="mDesc" placeholder="e.g. Freelance project" />
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Amount</label>
+            <input type="number" id="mAmt" placeholder="0.00" min="0" step="0.01" />
+          </div>
+          <div class="field">
+            <label>Date</label>
+            <input type="date" id="mDate" />
+          </div>
+        </div>
+        <div class="field">
+          <label>Category</label>
+          <select id="mCat">
+            <option value="">Select category</option>
+            <option>Salary</option>
+            <option>Food &amp; Dining</option>
+            <option>Shopping</option>
+            <option>Recharge &amp; Bills</option>
+            <option>Petrol &amp; Auto</option>
+            <option>Utilities</option>
+            <option>Entertainment</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <p id="mErr" class="err-text"></p>
+        <button class="btn-submit" onclick="saveTransaction()">Add transaction</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
